@@ -96,9 +96,10 @@ public class GameStateController : MonoBehaviour
         face.timerIsRunning = true;
         face.currentTime = -1;
         player.health = 10;
-        player.poweredQuant = 0;
+        player.acceleration = 0;
+        /*player.poweredQuant = 0;
         player.powCount = 0.01f;
-        player.pwrDown();
+        player.pwrDown();*/
         face.HealthIncrease();
     }
 
@@ -114,9 +115,10 @@ public class GameStateController : MonoBehaviour
         StateShift(State.Play);
         face.timerIsRunning = true;
         player.health = 10;
-        player.poweredQuant = 0;
+        player.acceleration = 0;
+        /*player.poweredQuant = 0;
         player.powCount = 0.01f;
-        player.pwrDown();
+        player.pwrDown();*/
         face.HealthIncrease();
     }
 

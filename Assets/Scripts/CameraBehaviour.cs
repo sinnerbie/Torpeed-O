@@ -39,8 +39,11 @@ public class CameraBehaviour : MonoBehaviour
     void FOV()
     {
         Camera.main.fieldOfView = fov;
-        
-        switch (player.poweredQuant)
+
+        float scaled = map(0, 1, 47, 66, player.acceleration);
+        if (scaled != targetFov) targetFov = scaled;
+
+        /*switch (player.poweredQuant)
         {
             case 0:
                 targetFov = 47;
@@ -60,7 +63,7 @@ public class CameraBehaviour : MonoBehaviour
             default:
                 Debug.LogError("Not valid state");
                 break;
-        }
+        }*/
 
         if (fov != targetFov)
         {
@@ -76,6 +79,7 @@ public class CameraBehaviour : MonoBehaviour
             }
         }
     }
+
 
     void CameraAngle()
     {
@@ -122,4 +126,13 @@ public class CameraBehaviour : MonoBehaviour
             }
         }
 	}
+    public float map(float OldMin, float OldMax, float NewMin, float NewMax, float OldValue)
+    {
+
+        float OldRange = (OldMax - OldMin);
+        float NewRange = (NewMax - NewMin);
+        float NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin;
+
+        return (NewValue);
+    }
 }

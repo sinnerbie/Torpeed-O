@@ -14,6 +14,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public float playerSpeed = 3;
 
+    [Range(0, 1)]public float acceleration = 0;
+
     public ParticleSystem explosion;
 
     Interface hud;
@@ -31,8 +33,9 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         Movement();
+        PlayerAcceleration();
 
-        if (powered)
+        /*if (powered)
         {
             powCount -= Time.deltaTime;
         }
@@ -43,7 +46,7 @@ public class PlayerBehaviour : MonoBehaviour
             pwrDown();
         }
 
-        if (poweredQuant > 4) poweredQuant = 4;
+        if (poweredQuant > 4) poweredQuant = 4;*/
 
         if (health > 10) health = 10;
 
@@ -87,10 +90,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void powerUp()
     {
-        poweredQuant++;
+        //poweredQuant++;
         health += 1;
         hud.HealthIncrease();
-        switch (poweredQuant)
+        /*switch (poweredQuant)
         {
             case 0:
                 Time.timeScale = 1;
@@ -124,7 +127,23 @@ public class PlayerBehaviour : MonoBehaviour
             default:
                 Debug.LogError("Not valid state");
                 break;
-        }
+        }*/
+    }
+
+    public void PlayerAcceleration()
+    {
+        float scaled = map(0, 1, 1, 2.5f, acceleration);
+        Time.timeScale = scaled;
+    }
+
+    public float map(float OldMin, float OldMax, float NewMin, float NewMax, float OldValue)
+    {
+
+        float OldRange = (OldMax - OldMin);
+        float NewRange = (NewMax - NewMin);
+        float NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin;
+
+        return (NewValue);
     }
 
     public void pwrDown()
