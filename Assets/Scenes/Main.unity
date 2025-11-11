@@ -5896,6 +5896,7 @@ GameObject:
   - component: {fileID: 404339077}
   - component: {fileID: 404339076}
   - component: {fileID: 404339075}
+  - component: {fileID: 404339078}
   m_Layer: 5
   m_Name: DifBar
   m_TagString: Untagged
@@ -5987,6 +5988,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404339073}
   m_CullTransparentMesh: 1
+--- !u!95 &404339078
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404339073}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7972a670a4e74d84cb0bdd02234928cc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &484468370 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3071180390171350127, guid: 75fd9a74b02593448836f4000f1370fe, type: 3}
@@ -7253,8 +7276,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3666565218851944570, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
       propertyPath: m_Text
-      value: Easy
+      value: EASY
       objectReference: {fileID: 0}
+    - target: {fileID: 3666565218851944570, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: df7c02bac68bbc94ebf6e698cf22a52f, type: 3}
     - target: {fileID: 5844237814790673263, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7929,8 +7956,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3666565218851944570, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
       propertyPath: m_Text
-      value: Normal
+      value: NORMAL
       objectReference: {fileID: 0}
+    - target: {fileID: 3666565218851944570, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: df7c02bac68bbc94ebf6e698cf22a52f, type: 3}
     - target: {fileID: 5844237814790673263, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9062,7 +9093,7 @@ MonoBehaviour:
   OverUI: {fileID: 945522329}
   clearObst: {fileID: 135173273}
   MinigameScreen: {fileID: 1215401071976496178, guid: 4a49c26a5a1b4fa429381897718a8ff2, type: 3}
-  difBar: {fileID: 404339074}
+  difBar: {fileID: 404339078}
 --- !u!1 &1570536190
 GameObject:
   m_ObjectHideFlags: 0
@@ -9366,8 +9397,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3666565218851944570, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
       propertyPath: m_Text
-      value: Hard
+      value: HARD
       objectReference: {fileID: 0}
+    - target: {fileID: 3666565218851944570, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: df7c02bac68bbc94ebf6e698cf22a52f, type: 3}
     - target: {fileID: 5844237814790673263, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9968,6 +10003,22 @@ PrefabInstance:
     - target: {fileID: 1825230244651630342, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2720980845883840629, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -15.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2720980845883840629, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2720980845883840629, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2720980845883840629, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.33000183
       objectReference: {fileID: 0}
     - target: {fileID: 3262870946439071145, guid: 8071e3ddab32f1f44b812259c8fe93f5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

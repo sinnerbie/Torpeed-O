@@ -12,7 +12,7 @@ public class GameStateController : MonoBehaviour
 
     public GameObject StartUI, PlayUI, OverUI, clearObst, MinigameScreen;
     private GameObject minScree;
-    public RectTransform difBar;
+    public Animator difBar;
 
     Interface face;
     PlayerBehaviour player;
@@ -44,15 +44,6 @@ public class GameStateController : MonoBehaviour
             default:
                 Debug.LogError("Not valid game state");
                 break;
-        }
-
-        if (difVisible)
-        {
-            difBar.anchoredPosition = new Vector2 (-147, -75.975f);
-        }
-        else
-        {
-            difBar.anchoredPosition = new Vector2(-282.369f, -75.975f);
         }
     }
 
@@ -132,21 +123,28 @@ public class GameStateController : MonoBehaviour
     public void DifOptions()
     {
         difVisible = !difVisible;
+        if (difVisible)
+            difBar.Play("LoadIn");
+        else
+            difBar.Play("LoadOut");
     }
 
     public void ShiftEasy()
     {
         currentDif = Difficulty.Easy;
-        difVisible = false; 
+        difVisible = false;
+        difBar.Play("LoadOut");
     }
     public void ShiftNorm()
     {
         currentDif = Difficulty.Normal;
         difVisible = false;
+        difBar.Play("LoadOut");
     }
     public void ShiftHard()
     {
         currentDif = Difficulty.Hard;
         difVisible = false;
+        difBar.Play("LoadOut");
     }
 }
