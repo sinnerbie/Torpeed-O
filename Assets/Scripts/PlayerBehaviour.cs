@@ -21,7 +21,13 @@ public class PlayerBehaviour : MonoBehaviour
     Interface hud;
     CameraBehaviour cam;
     AudioSource kaboom;
+    ArduinoControls ardCon;
     public AudioSource turbine;
+
+    void Awake()
+    {
+        ardCon = GetComponent<ArduinoControls>();
+    }
 
     void Start()
     {
