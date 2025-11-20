@@ -24,6 +24,8 @@ public class PlayerBehaviour : MonoBehaviour
     ArduinoControls ardCon;
     public AudioSource turbine;
 
+    public bool aoCon = false;
+
     void Awake()
     {
         ardCon = GetComponent<ArduinoControls>();
@@ -36,10 +38,16 @@ public class PlayerBehaviour : MonoBehaviour
         kaboom = GetComponent<AudioSource>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        Movement();
-        PlayerAcceleration();
+        if (!ardCon)
+        {
+            Movement();
+            PlayerAcceleration();
+        } 
+        else
+            ArdMovement();
+
 
         /*if (powered)
         {
@@ -80,18 +88,34 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Movement()
     {
-        float hor = Input.GetAxisRaw("Horizontal");
-        transform.Translate(0, 0, hor * -playerSpeed * Time.deltaTime);
-
         if (transform.position.z > 18)
-        {
             transform.position = new Vector3(0, 0, 18);
-        }
 
         if (transform.position.z < 0)
-        {
             transform.position = new Vector3(0, 0, 0);
+
+        float hor = Input.GetAxisRaw("Horizontal");
+        transform.Translate(0, 0, hor * -playerSpeed * Time.deltaTime);
+    }
+
+    float delay;
+    private void ArdMovement()
+    {
+        if (ardCon.leftHand <= 20f && ardCon.rightHand <= 20f)
+        {
+            if (ardCon.leftHand > ardCon.rightHand)
+                transform.Translate(0, 0, 1 * playerSpeed * Time.deltaTime);
+            else
+                transform.Translate(0, 0, 1 * -playerSpeed * Time.deltaTime);
         }
+
+        /*if (ardCon.leftHand <= 10f && ardCon.rightHand <= 10f)
+        {
+            float toAccelerate = ((ardCon.leftHand + ardCon.rightHand) / 2) / 10;
+            acceleration = map(10, 2, 0, 1, toAccelerate);
+        }*/
+
+        PlayerAcceleration();
     }
 
     public void powerUp()

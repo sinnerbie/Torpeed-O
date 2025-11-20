@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ArduinoControls : MonoBehaviour
 {
-    SerialPort serial = new SerialPort("COM3", 9600);
+    SerialPort serial = new SerialPort("COM5", 9600);
 
     public float leftHand;
     public float rightHand;
@@ -14,20 +14,44 @@ public class ArduinoControls : MonoBehaviour
     string toRead = "";
     string value = "";
 
-    void Start()
+    bool canRead = false;
+    public void StartReading()
     {
+        serial.DtrEnable = true;
+        serial.ReadTimeout = 5000;
         serial.Open();
-        serial.ReadTimeout = 100;
+        canRead = true;
     }
 
+    public void StopReading()
+    {
+        canRead = false;
+        serial.Close();
+    }
+
+    float delay;
     void Update()
     {
-        data = serial.ReadLine();
+        if (canRead && Time.time > delay)
+        {
+            data = serial.ReadLine();
 
-        for (int i = 0; i < 9; i++)
-            toRead += data[i];
+            toRead = "";
 
-        switch (toRead)
+            if (data.Length > 9) {
+                for (int i = 0; i < 9; i++)
+                    toRead += data[i];
+            }
+
+            SortLine(toRead);
+
+            delay = Time.time + 0.2f;
+        }
+    }
+
+    void SortLine(string readThis)
+    {
+        switch (readThis)
         {
             case "DistanceL":
                 value = "";
@@ -36,7 +60,7 @@ public class ArduinoControls : MonoBehaviour
                     if (i > 11)
                         value += data[i];
                 }
-                leftHand = float.Parse(value);
+                leftHand = float.Parse(value) * 0.01f;
                 break;
             case "DistanceR":
                 value = "";
@@ -45,7 +69,7 @@ public class ArduinoControls : MonoBehaviour
                     if (i > 11)
                         value += data[i];
                 }
-                rightHand = float.Parse(value);
+                rightHand = float.Parse(value) * 0.01f;
                 break;
             case "dialValue":
                 value = "";
