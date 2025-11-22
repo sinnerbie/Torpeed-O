@@ -1,0 +1,49 @@
+int trigPinL = 10;
+int echoPinL = 11;
+float durationL, distanceL;
+
+int trigPinR = 9;
+int echoPinR = 8;
+float durationR, distanceR;
+
+int dialPin = A0;
+
+void setup() {
+  pinMode(trigPinL, OUTPUT);
+  pinMode(echoPinL, INPUT);
+  pinMode(trigPinR, OUTPUT);
+  pinMode(echoPinR, INPUT);
+  pinMode(dialPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  digitalWrite(trigPinL, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPinL, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPinL, LOW);
+  durationL = pulseIn(echoPinL, HIGH);
+  distanceL = (durationL*.0343)/2;
+  Serial.print("DistanceL = ");
+  Serial.println(distanceL);
+  
+  delay(100);
+  
+  digitalWrite(trigPinR, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPinR, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPinR, LOW);
+  durationR = pulseIn(echoPinR, HIGH);
+  distanceR = (durationR*.0343)/2;
+  Serial.print("DistanceR = ");
+  Serial.println(distanceR);
+  
+  delay(100);
+  
+  Serial.print("dialValue = ");
+  Serial.println(analogRead(dialPin));
+  
+  delay(100);
+}
