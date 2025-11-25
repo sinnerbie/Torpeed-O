@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.IO.Ports;
 using System.Collections;
+using System.Threading;
 
 public class ArduinoControls : MonoBehaviour
 {
-    SerialPort serial = new SerialPort("COM5", 9600);
+    SerialPort serial = new SerialPort("COM6", 9600);
+    Thread serialThread;
 
     public float leftHand;
     public float rightHand;
@@ -15,11 +17,14 @@ public class ArduinoControls : MonoBehaviour
     string value = "";
 
     bool canRead = false;
-    public void StartReading()
+    void Start()
     {
         serial.DtrEnable = true;
-        serial.ReadTimeout = 5000;
+        serial.ReadTimeout = 100;
         serial.Open();
+        serialThread = new Thread(new ThreadStart(ReadFromPort));
+        serialThread.IsBackground = true;
+        serialThread.Start();
         canRead = true;
     }
 
@@ -29,23 +34,30 @@ public class ArduinoControls : MonoBehaviour
         serial.Close();
     }
 
-    float delay;
-    void Update()
+    void ReadFromPort()
     {
-        if (canRead && Time.time > delay)
-        {
-            data = serial.ReadLine();
+        while (true) {
+            if (serial.IsOpen)
+            {
+                try
+                {
+                    data = serial.ReadLine();
 
-            toRead = "";
+                    toRead = "";
 
-            if (data.Length > 9) {
-                for (int i = 0; i < 9; i++)
-                    toRead += data[i];
+                    if (data.Length > 9)
+                    {
+                        for (int i = 0; i < 9; i++)
+                            toRead += data[i];
+                    }
+
+                    SortLine(toRead);
+                }
+                catch (System.Exception)
+                {
+
+                }
             }
-
-            SortLine(toRead);
-
-            delay = Time.time + 0.2f;
         }
     }
 

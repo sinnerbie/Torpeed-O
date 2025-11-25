@@ -25,6 +25,7 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioSource turbine;
 
     public bool aoCon = false;
+    public int ardPlayDir = 0;
 
     void Awake()
     {
@@ -43,11 +44,11 @@ public class PlayerBehaviour : MonoBehaviour
         if (!ardCon)
         {
             Movement();
-            PlayerAcceleration();
         } 
         else
             ArdMovement();
 
+        PlayerAcceleration();
 
         /*if (powered)
         {
@@ -101,13 +102,31 @@ public class PlayerBehaviour : MonoBehaviour
     float delay;
     private void ArdMovement()
     {
-        if (ardCon.leftHand <= 20f && ardCon.rightHand <= 20f)
+        if (transform.position.z > 18)
+            transform.position = new Vector3(0, 0, 18);
+
+        if (transform.position.z < 0)
+            transform.position = new Vector3(0, 0, 0);
+
+        if (ardCon.leftHand <= 30f && ardCon.rightHand <= 30f)
         {
-            if (ardCon.leftHand > ardCon.rightHand)
+            if (ardCon.leftHand > ardCon.rightHand + 5)
+            {
                 transform.Translate(0, 0, 1 * playerSpeed * Time.deltaTime);
-            else
+                ardPlayDir = 1;
+            }
+            else if (ardCon.rightHand > ardCon.leftHand + 5)
+            {
                 transform.Translate(0, 0, 1 * -playerSpeed * Time.deltaTime);
+                ardPlayDir = -1;
+            }
+            else
+            {
+                ardPlayDir = 0;
+            }
         }
+        else
+            ardPlayDir = 0;
 
         /*if (ardCon.leftHand <= 10f && ardCon.rightHand <= 10f)
         {

@@ -1,9 +1,9 @@
-int trigPinL = 10;
-int echoPinL = 11;
+int trigPinR = 10;
+int echoPinR = 11;
 float durationL, distanceL;
 
-int trigPinR = 9;
-int echoPinR = 8;
+int trigPinL = 9;
+int echoPinL = 8;
 float durationR, distanceR;
 
 int dialPin = A0;
@@ -15,6 +15,7 @@ void setup() {
   pinMode(echoPinR, INPUT);
   pinMode(dialPin, INPUT);
   Serial.begin(9600);
+  Serial.flush();
 }
 
 void loop() {
@@ -45,5 +46,6 @@ void loop() {
   Serial.print("dialValue = ");
   Serial.println(analogRead(dialPin));
   
-  delay(100);
+  delay(500);
 }
+

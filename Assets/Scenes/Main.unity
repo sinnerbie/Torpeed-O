@@ -5770,6 +5770,7 @@ MonoBehaviour:
   explosion: {fileID: 160029355}
   turbine: {fileID: 1451284914}
   aoCon: 1
+  ardPlayDir: 0
 --- !u!4 &398760065
 Transform:
   m_ObjectHideFlags: 0
