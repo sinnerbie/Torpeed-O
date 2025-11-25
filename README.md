@@ -6,7 +6,7 @@ Este proyecto se está desarrollando por un único estudiante.
 Intentar aumentar la funcionalidad de los controles de gestión y aumentar la jugabilidad hasta que sea igual o mejor que los controles de teclado.
 
 # Seguimiento del proyecto:
-## [Fecha]
+## 11 de Nov 2025 
 Compartido el repositiorio del proyecto "Torpeed-O" con el profesor
 ## 18 de Nov 2025 
 Creado script "ArduinoControl" para leer el serial monitor del arduino y pasarlo a variables del juego
