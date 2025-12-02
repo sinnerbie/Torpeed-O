@@ -59,4 +59,9 @@ public class PlayerAnimations : MonoBehaviour
 
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
+
+    void Hello()
+    {
+        Debug.Log("Event works");
+    }
 }

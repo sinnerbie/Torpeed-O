@@ -16,6 +16,7 @@ public class MinigameRules : MonoBehaviour
     List<int> cardIDs = new List<int>();
     int infLimit, supLimit;
     int MarkI, MarkS;
+    public int selectedCard;
 
     bool goalLocated = false;
     public Text result;
@@ -63,6 +64,7 @@ public class MinigameRules : MonoBehaviour
 
         supLimit = cards.Count;
         playerTurn = true;
+        SelectCard(FindFirstObjectByType<ArduinoControls>().dialPos);
     }
 
     void Update()
@@ -70,6 +72,16 @@ public class MinigameRules : MonoBehaviour
         if (!playerTurn)
         {
             EnemyTurn();
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (!cards[selectedCard].GetComponent<CardProperties>().beenClicked)
+                {
+                    cards[selectedCard].GetComponent<CardProperties>().Clicked();
+                }
+            }
         }
     }
 
@@ -187,6 +199,21 @@ public class MinigameRules : MonoBehaviour
         playerTurn = !playerTurn;
     }
 
+    public void SelectCard(int dial)
+    {
+        Debug.Log("Changing selection");
+        int newCard = map(0, 1024, 0, totalCards - 1, dial);
+        selectedCard = newCard;
+
+        for (int i = 0; i < totalCards; i++)
+        {
+            if (i == selectedCard)
+                cards[i].GetComponent<CardProperties>().CheckSelected(true);
+            else
+                cards[i].GetComponent<CardProperties>().CheckSelected(false);
+        }
+    }
+
     public void GoalFound()
     {
         goalLocated = true;
@@ -211,5 +238,15 @@ public class MinigameRules : MonoBehaviour
     void Failure()
     {
         result.text = "You lost!";
+    }
+
+    public int map(int OldMin, int OldMax, int NewMin, int NewMax, int OldValue)
+    {
+
+        int OldRange = (OldMax - OldMin);
+        int NewRange = (NewMax - NewMin);
+        int NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin;
+
+        return (NewValue);
     }
 }

@@ -12,7 +12,7 @@ public class PlayerBehaviour : MonoBehaviour
     public bool invincible = false;
     float inMoment = 1;
 
-    public float playerSpeed = 3;
+    public float playerSpeed = 1.5f;
 
     [Range(0, 1)]public float acceleration = 0;
 
@@ -112,12 +112,14 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (ardCon.leftHand > ardCon.rightHand + 5)
             {
-                transform.Translate(0, 0, 1 * playerSpeed * Time.deltaTime);
+                float rightForce = map(5, 25, 1, 0, ardCon.rightHand);
+                transform.Translate(0, 0, rightForce * playerSpeed * Time.deltaTime);
                 ardPlayDir = 1;
             }
             else if (ardCon.rightHand > ardCon.leftHand + 5)
             {
-                transform.Translate(0, 0, 1 * -playerSpeed * Time.deltaTime);
+                float leftForce = map(5, 25, 1, 0, ardCon.leftHand);
+                transform.Translate(0, 0, leftForce * -playerSpeed * Time.deltaTime);
                 ardPlayDir = -1;
             }
             else
@@ -128,11 +130,13 @@ public class PlayerBehaviour : MonoBehaviour
         else
             ardPlayDir = 0;
 
-        /*if (ardCon.leftHand <= 10f && ardCon.rightHand <= 10f)
+        if (ardCon.leftHand <= 10f && ardCon.rightHand <= 10f)
         {
-            float toAccelerate = ((ardCon.leftHand + ardCon.rightHand) / 2) / 10;
-            acceleration = map(10, 2, 0, 1, toAccelerate);
-        }*/
+            float toAccelerate = ((ardCon.leftHand + ardCon.rightHand) / 2);
+            acceleration = map(10, 4, 0, 1, toAccelerate);
+        }
+        else
+            acceleration = 0;
 
         PlayerAcceleration();
     }

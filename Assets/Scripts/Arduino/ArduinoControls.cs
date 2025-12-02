@@ -2,6 +2,8 @@ using UnityEngine;
 using System.IO.Ports;
 using System.Collections;
 using System.Threading;
+using UnityEngine.Events;
+using System;
 
 public class ArduinoControls : MonoBehaviour
 {
@@ -11,12 +13,16 @@ public class ArduinoControls : MonoBehaviour
     public float leftHand;
     public float rightHand;
     public int dialPos;
+    int oldDial;
 
     string data = "";
     string toRead = "";
     string value = "";
 
     bool canRead = false;
+
+    public static Action OnDialChange;
+
     void Start()
     {
         serial.DtrEnable = true;
@@ -32,6 +38,16 @@ public class ArduinoControls : MonoBehaviour
     {
         canRead = false;
         serial.Close();
+    }
+
+    private void FixedUpdate()
+    {
+        if (dialPos != oldDial)
+        {
+            if (FindFirstObjectByType<MinigameRules>() != null)
+                FindFirstObjectByType<MinigameRules>().SelectCard(dialPos);
+            oldDial = dialPos;
+        }
     }
 
     void ReadFromPort()

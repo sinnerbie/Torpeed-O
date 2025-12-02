@@ -7,6 +7,7 @@ public class CardProperties : MonoBehaviour
 {
     public bool isGoal;
     public bool beenClicked = false;
+    public GameObject marker;
 
     MinigameRules MgRl;
     Animator myAni;
@@ -45,5 +46,12 @@ public class CardProperties : MonoBehaviour
         {
             MgRl.ShiftTurn();
         }
+    }
+
+    public void CheckSelected(bool selected)
+    {
+        if (selected)
+            marker.SetActive(true);
+        else marker.SetActive(false);
     }
 }

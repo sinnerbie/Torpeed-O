@@ -7,6 +7,7 @@ int echoPinL = 8;
 float durationR, distanceR;
 
 int dialPin = A0;
+int oldDial;
 
 void setup() {
   pinMode(trigPinL, OUTPUT);
@@ -43,9 +44,11 @@ void loop() {
   
   delay(100);
   
-  Serial.print("dialValue = ");
-  Serial.println(analogRead(dialPin));
+  if (analogRead(dialPin) != oldDial) {
+    Serial.print("dialValue = ");
+    Serial.println(analogRead(dialPin));
+    oldDial = analogRead(dialPin);
+  }
   
   delay(500);
 }
-
