@@ -9,12 +9,16 @@ float durationR, distanceR;
 int dialPin = A0;
 int oldDial;
 
+int butPin = 7;
+int oldBut;
+
 void setup() {
   pinMode(trigPinL, OUTPUT);
   pinMode(echoPinL, INPUT);
   pinMode(trigPinR, OUTPUT);
   pinMode(echoPinR, INPUT);
   pinMode(dialPin, INPUT);
+  pinMode(butPin, INPUT_PULLUP);
   Serial.begin(9600);
   Serial.flush();
 }
@@ -50,5 +54,12 @@ void loop() {
     oldDial = analogRead(dialPin);
   }
   
-  delay(500);
+  delay(100);
+  
+  if (digitalRead(butPin) != 1) {
+    Serial.print("butnValue = ");
+    Serial.println("true");
+  }
+  
+  delay(100);
 }
