@@ -29,8 +29,8 @@ Mejorado controles de movimiento horizontal para ir más rápido dependiendo de 
 * Desplazamiento horizontal con los valores de los sensores ultra-sónicos.
 * Subida (y bajada) de velocidad con los sensores ultra-sónicos.
 * Selección de cofre del minijuego con el potenciometro.
-## Por hacer:
 * Confirmación de selección de cofre con el botón del circuito.
 * Ajustar umbral del potenciometro para no saltar el cofre último.
+## Por hacer:
 * Ajustar velocidad de animación de giro del torpedo.
 * Ajustar acceleración de desplazamiento horizontal del torpedo.
