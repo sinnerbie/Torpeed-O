@@ -5903,6 +5903,7 @@ MonoBehaviour:
   leftHand: 0
   rightHand: 0
   dialPos: 0
+  buttonPressed: 0
 --- !u!1 &404339073
 GameObject:
   m_ObjectHideFlags: 0
@@ -9946,7 +9947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 75fd9a74b02593448836f4000f1370fe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 75fd9a74b02593448836f4000f1370fe, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9954,7 +9955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 75fd9a74b02593448836f4000f1370fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2000002
+      value: -0.299
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 75fd9a74b02593448836f4000f1370fe, type: 3}
       propertyPath: m_LocalRotation.w

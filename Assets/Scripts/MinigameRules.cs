@@ -200,7 +200,6 @@ public class MinigameRules : MonoBehaviour
 
     public void SelectCard(int dial)
     {
-        Debug.Log("Changing selection");
         int newCard = map(0, 1010, 0, totalCards - 1, dial);
         selectedCard = newCard;
 

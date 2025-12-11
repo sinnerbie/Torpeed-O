@@ -114,7 +114,6 @@ public class ArduinoControls : MonoBehaviour
                 break;
             case "butnValue":
                 buttonPressed = true;
-                Debug.Log("Button");
                 break;
         }
     }
