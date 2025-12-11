@@ -7,7 +7,7 @@ using System;
 
 public class ArduinoControls : MonoBehaviour
 {
-    SerialPort serial = new SerialPort("COM6", 9600);
+    SerialPort serial = new SerialPort("COM7", 9600);
     Thread serialThread;
 
     public float leftHand;
@@ -18,10 +18,11 @@ public class ArduinoControls : MonoBehaviour
     string data = "";
     string toRead = "";
     string value = "";
+    public bool buttonPressed = false;
 
     bool canRead = false;
 
-    public static Action OnDialChange;
+    public static Action OnButtonPressed;
 
     void Start()
     {
@@ -40,7 +41,7 @@ public class ArduinoControls : MonoBehaviour
         serial.Close();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (dialPos != oldDial)
         {
@@ -48,6 +49,9 @@ public class ArduinoControls : MonoBehaviour
                 FindFirstObjectByType<MinigameRules>().SelectCard(dialPos);
             oldDial = dialPos;
         }
+
+        if (FindFirstObjectByType<MinigameRules>() == null)
+            buttonPressed = false;
     }
 
     void ReadFromPort()
@@ -107,6 +111,10 @@ public class ArduinoControls : MonoBehaviour
                         value += data[i];
                 }
                 dialPos = int.Parse(value);
+                break;
+            case "butnValue":
+                buttonPressed = true;
+                Debug.Log("Button");
                 break;
         }
     }

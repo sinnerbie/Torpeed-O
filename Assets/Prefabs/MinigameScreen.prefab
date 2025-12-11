@@ -299,6 +299,7 @@ MonoBehaviour:
   goalCard: {fileID: 1341050877312959802, guid: fbaf94ebb37785443b2e405a844e9a12, type: 3}
   totalCards: 10
   playerTurn: 0
+  selectedCard: 0
   result: {fileID: 4747150841872450421}
 --- !u!114 &1558423065939833032
 MonoBehaviour:
@@ -349,7 +350,7 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 4
   m_StartCorner: 0
-  m_StartAxis: 1
+  m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
   m_Spacing: {x: 20, y: 15}
   m_Constraint: 0

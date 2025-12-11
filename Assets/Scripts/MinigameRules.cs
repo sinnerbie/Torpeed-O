@@ -70,17 +70,16 @@ public class MinigameRules : MonoBehaviour
     void Update()
     {
         if (!playerTurn)
-        {
             EnemyTurn();
-        }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (FindFirstObjectByType<ArduinoControls>().buttonPressed)
             {
                 if (!cards[selectedCard].GetComponent<CardProperties>().beenClicked)
                 {
                     cards[selectedCard].GetComponent<CardProperties>().Clicked();
                 }
+                FindFirstObjectByType<ArduinoControls>().buttonPressed = false;
             }
         }
     }
@@ -202,7 +201,7 @@ public class MinigameRules : MonoBehaviour
     public void SelectCard(int dial)
     {
         Debug.Log("Changing selection");
-        int newCard = map(0, 1024, 0, totalCards - 1, dial);
+        int newCard = map(0, 1010, 0, totalCards - 1, dial);
         selectedCard = newCard;
 
         for (int i = 0; i < totalCards; i++)
