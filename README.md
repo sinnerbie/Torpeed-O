@@ -37,3 +37,8 @@ Incorporado la utilización de un botón en el circuito arduino para confirmar l
 * Ajustar acceleración de desplazamiento horizontal del torpedo.
 ## Por hacer:
 * Nada :)
+# Resultado
+
+
+https://github.com/user-attachments/assets/9090d655-1eb5-4375-bd06-760e23893fc8
+
