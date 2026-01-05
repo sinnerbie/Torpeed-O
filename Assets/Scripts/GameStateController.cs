@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GameStateController : MonoBehaviour
@@ -14,16 +15,26 @@ public class GameStateController : MonoBehaviour
     private GameObject minScree;
     public Animator difBar;
 
+    public GameObject ardScreen;
+    public Toggle ardToggle;
+    public InputField ardInput;
+
     Interface face;
     PlayerBehaviour player;
+    ArduinoControls ardCon;
 
     bool difVisible;
+
+    void Awake()
+    {
+        face = FindFirstObjectByType<Interface>();
+        player = FindFirstObjectByType<PlayerBehaviour>();
+        ardCon = FindFirstObjectByType<ArduinoControls>();
+    }
 
     void Start()
     {
         CurrentState = State.Start;
-        face = FindFirstObjectByType<Interface>();
-        player = FindFirstObjectByType<PlayerBehaviour>();
         difVisible = false;
         currentDif = Difficulty.Normal;
     }
@@ -97,9 +108,9 @@ public class GameStateController : MonoBehaviour
         face.currentTime = -1;
         player.health = 10;
         player.acceleration = 0;
-        /*player.poweredQuant = 0;
+        player.poweredQuant = 0;
         player.powCount = 0.01f;
-        player.pwrDown();*/
+        player.pwrDown();
         face.HealthIncrease();
     }
 
@@ -116,10 +127,23 @@ public class GameStateController : MonoBehaviour
         face.timerIsRunning = true;
         player.health = 10;
         player.acceleration = 0;
-        /*player.poweredQuant = 0;
+        player.poweredQuant = 0;
         player.powCount = 0.01f;
-        player.pwrDown();*/
+        player.pwrDown();
         face.HealthIncrease();
+    }
+
+    public void ToggleArduino(bool visible)
+    {
+        if (ardToggle.isOn)
+        {
+            ArduinoControls.portName = ardInput.text;
+            ardCon.StartReading();
+        }
+        else
+            ardCon.StopReading();
+
+        ardScreen.SetActive(visible);
     }
 
     public void DifOptions()

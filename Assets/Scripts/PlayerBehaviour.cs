@@ -39,29 +39,32 @@ public class PlayerBehaviour : MonoBehaviour
         kaboom = GetComponent<AudioSource>();
     }
 
-    void FixedUpdate()
+    public void ToggleArduinoControl()
     {
-        if (!ardCon)
+        aoCon = !aoCon;
+    }
+
+    void Update()
+    {
+        if (!aoCon)
         {
             Movement();
+            if (powered)
+                powCount -= Time.deltaTime;
+
+            if (powCount <= 0)
+            {
+                poweredQuant--;
+                pwrDown();
+            }
+
+            if (poweredQuant > 4) poweredQuant = 4;
         } 
         else
+        {
             ArdMovement();
-
-        PlayerAcceleration();
-
-        /*if (powered)
-        {
-            powCount -= Time.deltaTime;
+            PlayerAcceleration();
         }
-
-        if (powCount <= 0)
-        {
-            poweredQuant--;
-            pwrDown();
-        }
-
-        if (poweredQuant > 4) poweredQuant = 4;*/
 
         if (health > 10) health = 10;
 
@@ -143,44 +146,48 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void powerUp()
     {
-        //poweredQuant++;
         health += 1;
         hud.HealthIncrease();
-        /*switch (poweredQuant)
+        if (!aoCon)
         {
-            case 0:
-                Time.timeScale = 1;
-                powered = false;
-                powCount = 0.01f;
-                turbine.pitch = 0.66f;
-                break;
-            case 1:
-                powCount = 10;
-                Time.timeScale = 1.5f;
-                turbine.pitch = 1.07f;
-                powered = true;
-                break;
-            case 2:
-                powCount = 10;
-                Time.timeScale = 2;
-                powered = true;
-                turbine.pitch = 1.49f;
-                break;
-            case 3:
-                powCount = 10;
-                Time.timeScale = 2.5f;
-                powered = true;
-                turbine.pitch = 1.66f;
-                break;
-            case 4:
-                poweredQuant -= 1;
-                powCount = 10;
-                turbine.pitch = 1.66f;
-                break;
-            default:
-                Debug.LogError("Not valid state");
-                break;
-        }*/
+            poweredQuant++;
+
+            switch (poweredQuant)
+            {
+                case 0:
+                    Time.timeScale = 1;
+                    powered = false;
+                    powCount = 0.01f;
+                    turbine.pitch = 0.66f;
+                    break;
+                case 1:
+                    powCount = 10;
+                    Time.timeScale = 1.5f;
+                    turbine.pitch = 1.07f;
+                    powered = true;
+                    break;
+                case 2:
+                    powCount = 10;
+                    Time.timeScale = 2;
+                    powered = true;
+                    turbine.pitch = 1.49f;
+                    break;
+                case 3:
+                    powCount = 10;
+                    Time.timeScale = 2.5f;
+                    powered = true;
+                    turbine.pitch = 1.66f;
+                    break;
+                case 4:
+                    poweredQuant -= 1;
+                    powCount = 10;
+                    turbine.pitch = 1.66f;
+                    break;
+                default:
+                    Debug.LogError("Not valid state");
+                    break;
+            }
+        }
     }
 
     public void PlayerAcceleration()

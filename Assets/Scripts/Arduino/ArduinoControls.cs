@@ -7,7 +7,8 @@ using System;
 
 public class ArduinoControls : MonoBehaviour
 {
-    SerialPort serial = new SerialPort("COM7", 9600);
+    public static string portName = "COM7";
+    SerialPort serial = new SerialPort(portName, 9600);
     Thread serialThread;
 
     public float leftHand;
@@ -24,8 +25,10 @@ public class ArduinoControls : MonoBehaviour
 
     public static Action OnButtonPressed;
 
-    void Start()
+    public void StartReading()
     {
+        Debug.Log(portName);
+        serial = new SerialPort(portName, 9600);
         serial.DtrEnable = true;
         serial.ReadTimeout = 100;
         serial.Open();
