@@ -41,7 +41,10 @@ public class Interface : MonoBehaviour
             DisplayTime(currentTime);
         }
         
-        gauge.fillAmount = player.acceleration;
+        if (player.aoCon)
+            gauge.fillAmount = player.acceleration;
+        else
+            gauge.fillAmount = player.powCount / 10;
 
         switch (player.poweredQuant)
         {

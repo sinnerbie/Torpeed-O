@@ -24,10 +24,12 @@ public class MinigameRules : MonoBehaviour
     int eTurnCount = -1;
 
     GameStateController controller;
+    PlayerBehaviour player;
 
     void Awake()
     {
         controller = FindFirstObjectByType<GameStateController>();
+        player = FindFirstObjectByType<PlayerBehaviour>();
     }
 
     void Start()
@@ -208,6 +210,12 @@ public class MinigameRules : MonoBehaviour
             if (i == selectedCard)
                 cards[i].GetComponent<CardProperties>().CheckSelected(true);
             else
+                cards[i].GetComponent<CardProperties>().CheckSelected(false);
+        }
+
+        if (!player.aoCon)
+        {
+            for (int i = 0; i < totalCards; i++)
                 cards[i].GetComponent<CardProperties>().CheckSelected(false);
         }
     }
